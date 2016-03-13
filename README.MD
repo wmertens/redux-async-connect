@@ -88,6 +88,7 @@ app.get('*', (req, res) => {
 })
 
 function createPage(html, store) {
+  const state = serialize(store.getState())
   return `
     <!doctype html>
     <html>
@@ -95,7 +96,7 @@ function createPage(html, store) {
         <div id="app">${html}</div>
 
         <!-- its a Redux initial data -->
-        <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} charSet="UTF-8"/>
+        <script>window.__data=${state}</script>
       </body>
     </html>
   `
